@@ -1,6 +1,6 @@
 # react-canvas
 
-[Introductory blog post](http://engineering.flipboard.com/2015/02/mobile-web/)
+[Introductory blog post](http://engineering.flipboard.com/2015/02/mobile-web)
 
 React Canvas adds the ability for React components to render to `<canvas>` rather than DOM.
 
@@ -13,6 +13,12 @@ Having a long history of building interfaces geared toward mobile devices, we fo
 While there have been other attempts to bind canvas drawing APIs to React, they are more focused on visualizations and games. Where React Canvas differs is in the focus on building application user interfaces. The fact that it renders to canvas is an implementation detail.
 
 React Canvas brings some of the APIs web developers are familiar with and blends them with a high performance drawing engine.
+
+## Installation
+
+React Canvas is available through npm:
+
+```npm install react-canvas```
 
 ## React Canvas Components
 
@@ -37,6 +43,27 @@ React Canvas provides a set of standard React components that abstract the under
 ### &lt;Image&gt;
 
 **Image** is exactly what you think it is. However, it adds the ability to hide an image until it is fully loaded and optionally fade it in on load.
+
+### &lt;Gradient&gt;
+
+**Gradient** can be used to set the background of a group or surface. 
+```javascript
+  render() {
+    ...
+    return (
+      <Group style={this.getStyle()}>
+        <Gradient style={this.getGradientStyle()} 
+                  colorStops={this.getGradientColors()} />
+      </Group>
+    );
+  }
+  getGradientColors(){
+    return [
+      { color: "transparent", position: 0 },
+      { color: "#000", position: 1 }
+    ]
+  }
+``` 
 
 ### &lt;ListView&gt;
 
@@ -179,7 +206,26 @@ This will start a live reloading server on port 8080. To override the default se
 
 **A note on NODE_ENV and React**: running the examples with `NODE_ENV=production` will noticeably improve scrolling performance. This is because React skips propType validation in production mode.
 
+
+## Using with webpack
+
+The [brfs](https://github.com/substack/brfs) transform is required in order to use the project with webpack.
+
+```bash
+npm install -g brfs
+npm install --save-dev transform-loader brfs
+```
+
+Then add the [brfs](https://github.com/substack/brfs) transform to your webpack config
+
+```javascript
+module: {
+  postLoaders: [
+    { loader: "transform?brfs" }
+  ]
+}
+```
+
 ## Contributing
 
 We welcome pull requests for bug fixes, new features, and improvements to React Canvas. Contributors to the main repository must accept Flipboard's Apache-style [Individual Contributor License Agreement (CLA)](https://docs.google.com/forms/d/1gh9y6_i8xFn6pA15PqFeye19VqasuI9-bGp_e0owy74/viewform) before any changes can be merged.
-

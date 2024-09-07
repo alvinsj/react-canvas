@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     'listview': ['./examples/listview/app.js'],
     'timeline': ['./examples/timeline/app.js'],
+    'gradient': ['./examples/gradient/app.js'],
     'css-layout': ['./examples/css-layout/app.js']
   },
 
@@ -15,13 +16,13 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'jsx-loader!transform/cacheable?envify' },
+      { test: /\.js$/, loader: 'babel-loader!transform/cacheable?envify' },
     ],
     postLoaders: [
       { loader: "transform?brfs" }
     ]
   },
-
+  devtool: ['source-map'],
   resolve: {
     root: __dirname,
     alias: {
